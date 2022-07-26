@@ -5,18 +5,24 @@ import { auth } from '../firebase/config'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from 'firebase/auth'
 
 const store = createStore({
   state: {
-    user: null
+    user: null,
+    authIsReady: false
   },
 
   mutations: {
     setUser(state, payload) {
       state.user = payload
       console.log('user state changed:', state.user)
+    },
+
+    setAuthIsReady(state, payload) {
+      state.authIsReady = payload
     }
   },
 
@@ -49,7 +55,14 @@ const store = createStore({
   }
 })
 
+const unsubscribe = onAuthStateChanged(auth, (user) => {
+  store.commit('setAuthIsReady', true)
+  store.commit('setUser', user)
+  unsubscribe()
+})
+
 export default store
 
+// NOTE:
 // 'dispatch' -> actions || 'dispatch' for actions
 // 'commit' -> mutations || 'commit' for mutations

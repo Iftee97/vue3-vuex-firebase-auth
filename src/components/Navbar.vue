@@ -1,21 +1,18 @@
 <template>
   <nav>
     <h1>Vuex Auth</h1>
-    <!-- for all users -->
-    <div v-if="!user">
-      <router-link to="/">Home</router-link>
-    </div>
+    <div v-if="authIsReady">
+      <!-- for logged in users -->
+      <div v-if="user">
+        <span><strong>User:</strong> {{ user.email }}</span>
+        <button @click="handleClick">Logout</button>
+      </div>
 
-    <!-- for logged in users -->
-    <div v-if="user">
-      <span><strong>User:</strong> {{ user.email }}</span>
-      <button @click="handleClick">Logout</button>
-    </div>
-
-    <!-- for logged out users -->
-    <div v-if="!user">
-      <router-link to="/login">Login</router-link>
-      <router-link to="/signup">Signup</router-link>
+      <!-- for logged out users -->
+      <div v-if="!user">
+        <router-link to="/login">Login</router-link>
+        <router-link to="/signup">Signup</router-link>
+      </div>
     </div>
   </nav>
 </template>
@@ -33,8 +30,9 @@ export default {
     };
 
     return {
-      user: computed(() => store.state.user),
       handleClick,
+      user: computed(() => store.state.user),
+      authIsReady: computed(() => store.state.authIsReady),
     };
   },
 };
