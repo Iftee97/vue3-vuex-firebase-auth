@@ -2,16 +2,18 @@
   <nav>
     <h1>Vuex Auth</h1>
     <!-- for all users -->
-    <div>
+    <div v-if="!user">
       <router-link to="/">Home</router-link>
     </div>
+
     <!-- for logged in users -->
-    <div>
-      <span>Logged in as...</span>
+    <div v-if="user">
+      <span><strong>User:</strong> {{ user.email }}</span>
       <button @click="handleClick">Logout</button>
     </div>
+
     <!-- for logged out users -->
-    <div>
+    <div v-if="!user">
       <router-link to="/login">Login</router-link>
       <router-link to="/signup">Signup</router-link>
     </div>
@@ -19,11 +21,10 @@
 </template>
 
 <script>
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  name: "Navbar",
-
   setup() {
     const store = useStore();
 
@@ -32,6 +33,7 @@ export default {
     };
 
     return {
+      user: computed(() => store.state.user),
       handleClick,
     };
   },
