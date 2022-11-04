@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('authStore', {
   state: () => ({
     user: null,
     authIsReady: false,
-    showNavbar: false
+    showNavbar: false // might need for responsive view
   }),
 
   getters: {},
