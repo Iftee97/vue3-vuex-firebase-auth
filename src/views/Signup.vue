@@ -15,7 +15,7 @@
 
 <script>
 import { ref } from "vue";
-import { useStore } from "vuex";
+import { useAuthStore } from "../PiniaStores/authStore";
 import { useRouter } from "vue-router";
 
 export default {
@@ -24,17 +24,15 @@ export default {
     const password = ref("");
     const error = ref(null);
 
-    const store = useStore();
+    const authStore = useAuthStore();
     const router = useRouter();
 
     const handleSubmit = async () => {
-      // console.log(email.value, password.value);
       try {
-        await store.dispatch("signup", {
+        await authStore.signup({
           email: email.value,
           password: password.value,
         });
-        console.log("signed up");
         router.push("/"); // redirects to the homepage
       } catch (err) {
         error.value = err.message;
@@ -50,6 +48,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

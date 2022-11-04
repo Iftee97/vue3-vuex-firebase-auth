@@ -21,7 +21,7 @@
 
 <script>
 import { ref, computed } from "vue";
-import { useStore } from "vuex"; // required for accessing store for composition api
+import { useAuthStore } from "../PiniaStores/authStore";
 
 export default {
   setup() {
@@ -31,15 +31,12 @@ export default {
       { title: "Mario vs Luigi, Ultimate Showdown", id: 3 },
     ]);
 
-    const store = useStore();
+    const authStore = useAuthStore();
 
     return {
       blogs,
-      user: computed(() => store.state.user),
+      user: computed(() => authStore.user),
     };
   },
 };
 </script>
-
-<style scoped>
-</style>

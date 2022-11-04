@@ -19,24 +19,21 @@
 
 <script>
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { useAuthStore } from "../PiniaStores/authStore";
 
 export default {
   setup() {
-    const store = useStore();
+    const authStore = useAuthStore();
 
     const handleClick = () => {
-      store.dispatch("logout");
+      authStore.logout();
     };
 
     return {
       handleClick,
-      user: computed(() => store.state.user),
-      authIsReady: computed(() => store.state.authIsReady),
+      user: computed(() => authStore.user),
+      authIsReady: computed(() => authStore.authIsReady),
     };
   },
 };
 </script>
-
-<style scoped>
-</style>
