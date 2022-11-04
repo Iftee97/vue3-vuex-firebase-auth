@@ -12,7 +12,8 @@ import {
 export const useAuthStore = defineStore('authStore', {
   state: () => ({
     user: null,
-    authIsReady: false
+    authIsReady: false,
+    showNavbar: false
   }),
 
   getters: {},
@@ -47,6 +48,10 @@ export const useAuthStore = defineStore('authStore', {
         this.user = user
         unsubscribe()
       })
+    },
+
+    toggleNavbar() {
+      this.showNavbar = !this.showNavbar
     }
   },
 })

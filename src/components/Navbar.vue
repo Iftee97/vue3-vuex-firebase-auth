@@ -6,6 +6,7 @@
       <div v-if="user">
         <span><strong>User:</strong> {{ user.email }}</span>
         <button @click="handleClick">Logout</button>
+        <button @click="handleToggleNavbar">toggle -- {{ showNavbar }}</button>
       </div>
 
       <!-- for logged out users -->
@@ -24,13 +25,20 @@ import { useAuthStore } from "../PiniaStores/authStore";
 export default {
   setup() {
     const authStore = useAuthStore();
+    const showNavbar = computed(() => authStore.showNavbar);
 
     const handleClick = () => {
       authStore.logout();
     };
 
+    const handleToggleNavbar = () => {
+      authStore.toggleNavbar();
+    };
+
     return {
       handleClick,
+      handleToggleNavbar,
+      showNavbar,
       user: computed(() => authStore.user),
       authIsReady: computed(() => authStore.authIsReady),
     };
