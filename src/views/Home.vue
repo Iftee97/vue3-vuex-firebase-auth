@@ -15,7 +15,7 @@
           <span class="material-icons">thumb_down</span>
         </div>
         <!-- {{ user }} -->
-        <small style="margin-top: 1rem">
+        <small v-if="user" style="margin-top: 1rem">
           Author: <strong>{{ user.email }}</strong>
         </small>
       </div>
