@@ -46,6 +46,7 @@ export const useAuthStore = defineStore('authStore', {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         this.authIsReady = true
         this.user = user
+        console.log("user:", this.user)
         unsubscribe()
       })
     },
