@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>Vuex Auth</h1>
+    <h1>Pinia Auth</h1>
     <div v-if="authIsReady">
       <!-- for logged in users -->
       <div v-if="user">
