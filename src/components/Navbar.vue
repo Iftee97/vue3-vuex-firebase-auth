@@ -21,14 +21,17 @@
 <script>
 import { computed } from "vue";
 import { useAuthStore } from "../PiniaStores/authStore";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const authStore = useAuthStore();
     const showNavbar = computed(() => authStore.showNavbar);
+    const router = useRouter();
 
     const handleClick = () => {
       authStore.logout();
+      router.push("/login");
     };
 
     const handleToggleNavbar = () => {
