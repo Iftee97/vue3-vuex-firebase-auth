@@ -13,7 +13,8 @@ export const useAuthStore = defineStore('authStore', {
   state: () => ({
     user: null,
     authIsReady: false,
-    showNavbar: false // might need for responsive view
+    showNavbar: false, // might need for responsive view
+    loading: false
   }),
 
   getters: {},
@@ -42,12 +43,18 @@ export const useAuthStore = defineStore('authStore', {
       this.user = null
     },
 
-    async handleAuthStateChanged() {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        this.authIsReady = true
-        this.user = user
-        console.log("user:", this.user)
-        unsubscribe()
+    handleAuthStateChanged() {
+      this.loading = true
+      this.authIsReady = true
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user
+          this.loading = false
+        } else {
+          this.user = null
+          this.loading = false
+        }
+        console.log('user:', this.user)
       })
     },
 
