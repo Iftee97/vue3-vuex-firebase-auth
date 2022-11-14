@@ -20,17 +20,10 @@ export const useAuthStore = defineStore('authStore', {
   actions: {
     init() {
       this.loading = true
-
       onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.user = user
-          this.authIsReady = true
-          this.loading = false
-        } else {
-          this.user = null
-          this.authIsReady = false
-          this.loading = false
-        }
+        this.user = user
+        this.authIsReady = true
+        this.loading = false
         console.log('user:', this.user)
       })
     },

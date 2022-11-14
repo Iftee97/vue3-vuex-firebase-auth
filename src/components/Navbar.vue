@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>Pinia Auth</h1>
+    <h1 @click="this.$router.push('/')" class="navTitle">Pinia Auth</h1>
     <div v-if="authIsReady">
       <!-- for logged in users -->
       <div v-if="user">
@@ -50,3 +50,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.navTitle {
+  cursor: pointer;
+}
+</style>
