@@ -34,10 +34,8 @@ export default {
       { title: "...Then I Took an Arrow in the Knee", id: 2 },
       { title: "Mario vs Luigi, Ultimate Showdown", id: 3 },
     ]);
-
-    const user = computed(() => useAuthStore().user);
-
     const authStore = useAuthStore();
+    const user = computed(() => authStore.user);
 
     return {
       blogs,

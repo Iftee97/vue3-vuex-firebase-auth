@@ -13,13 +13,28 @@ export const useAuthStore = defineStore('authStore', {
   state: () => ({
     user: null,
     authIsReady: false,
-    showNavbar: false, // might need for responsive view
+    showNavbar: false, // might need later
     loading: false
   }),
 
-  getters: {},
-
   actions: {
+    init() {
+      this.loading = true
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user
+          this.authIsReady = true
+          this.loading = false
+        } else {
+          this.user = null
+          this.authIsReady = false
+          this.loading = false
+        }
+        console.log('user:', this.user)
+      })
+    },
+
     async signup({ email, password }) {
       const response = await createUserWithEmailAndPassword(auth, email, password)
       if (response) {
@@ -41,21 +56,6 @@ export const useAuthStore = defineStore('authStore', {
     async logout() {
       await signOut(auth)
       this.user = null
-    },
-
-    handleAuthStateChanged() {
-      this.loading = true
-      this.authIsReady = true
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.user = user
-          this.loading = false
-        } else {
-          this.user = null
-          this.loading = false
-        }
-        console.log('user:', this.user)
-      })
     },
 
     toggleNavbar() {

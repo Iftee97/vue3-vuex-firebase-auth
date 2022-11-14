@@ -8,7 +8,6 @@
 <script>
 import Navbar from "./components/Navbar";
 import { useAuthStore } from "./PiniaStores/authStore";
-import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -17,12 +16,7 @@ export default {
 
   mounted() {
     const authStore = useAuthStore();
-    authStore.handleAuthStateChanged();
-
-    const router = useRouter();
-    if (!authStore.user) {
-      router.push("/login");
-    }
+    authStore.init();
   },
 };
 </script>
