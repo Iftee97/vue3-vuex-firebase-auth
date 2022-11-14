@@ -27,6 +27,8 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const showNavbar = computed(() => authStore.showNavbar);
+    const user = computed(() => authStore.user);
+    const authIsReady = computed(() => authStore.authIsReady);
     const router = useRouter();
 
     const handleClick = () => {
@@ -42,8 +44,8 @@ export default {
       handleClick,
       handleToggleNavbar,
       showNavbar,
-      user: computed(() => authStore.user),
-      authIsReady: computed(() => authStore.authIsReady),
+      user,
+      authIsReady,
     };
   },
 };

@@ -35,11 +35,13 @@ export default {
       { title: "Mario vs Luigi, Ultimate Showdown", id: 3 },
     ]);
 
+    const user = computed(() => useAuthStore().user);
+
     const authStore = useAuthStore();
 
     return {
       blogs,
-      user: computed(() => authStore.user),
+      user,
     };
   },
 };
