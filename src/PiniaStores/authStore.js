@@ -54,5 +54,5 @@ export const useAuthStore = defineStore('authStore', {
     toggleNavbar() {
       this.showNavbar = !this.showNavbar
     }
-  },
+  }
 })
